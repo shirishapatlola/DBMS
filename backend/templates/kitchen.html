@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Kitchen Management</h1></div>
+<div class="card-box">
+    <table class="table table-striped">
+        <thead><tr><th>Ticket ID</th><th>Order ID</th><th>Customer</th><th>Status</th><th>Created</th></tr></thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.ticket_id }}</td>
+                <td>{{ row.order_id }}</td>
+                <td>{{ row.customer_name }}</td>
+                <td>
+                    <form method="post" class="d-flex gap-2 align-items-center">
+                        <input type="hidden" name="ticket_id" value="{{ row.ticket_id }}">
+                        <select class="form-select" name="ticket_status">
+                            <option value="pending" {% if row.ticket_status == 'pending' %}selected{% endif %}>Pending</option>
+                            <option value="preparing" {% if row.ticket_status == 'preparing' %}selected{% endif %}>Preparing</option>
+                            <option value="ready" {% if row.ticket_status == 'ready' %}selected{% endif %}>Ready</option>
+                            <option value="served" {% if row.ticket_status == 'served' %}selected{% endif %}>Served</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm" type="submit">Update</button>
+                    </form>
+                </td>
+                <td>{{ row.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

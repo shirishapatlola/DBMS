@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Real-time summaries from MySQL queries.</p>
+</div>
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Total Customers</span>
+            <strong>{{ metrics.customers }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Total Tables</span>
+            <strong>{{ metrics.tables }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Total Reservations</span>
+            <strong>{{ metrics.reservations }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Total Food Orders</span>
+            <strong>{{ metrics.orders }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Total Menu Items</span>
+            <strong>{{ metrics.menu_items }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Sales</span>
+            <strong>₹{{ '%.2f'|format(metrics.sales) }}</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="metric-card">
+            <span>Pending Kitchen</span>
+            <strong>{{ metrics.pending_kitchen }}</strong>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Reservations</h1></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-box">
+            <h4>Create Reservation</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Customer</label>
+                    <select class="form-select" name="customer_id" required>
+                        {% for customer in customers_list %}
+                        <option value="{{ customer.customer_id }}">{{ customer.customer_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Table</label>
+                    <select class="form-select" name="table_id" required>
+                        {% for table in tables_list %}
+                        <option value="{{ table.table_id }}">{{ table.table_number }} (capacity {{ table.capacity }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Reservation Date</label>
+                    <input class="form-control" type="date" name="reservation_date" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Reservation Time</label>
+                    <input class="form-control" type="time" name="reservation_time" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Guest Count</label>
+                    <input class="form-control" type="number" name="guest_count" min="1" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="status">
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card-box">
+            <h4>Reservation List</h4>
+            <table class="table table-striped">
+                <thead><tr><th>ID</th><th>Customer</th><th>Table</th><th>Date</th><th>Time</th><th>Guests</th><th>Status</th></tr></thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ row.reservation_id }}</td>
+                        <td>{{ row.customer_name }}</td>
+                        <td>{{ row.table_number }}</td>
+                        <td>{{ row.reservation_date }}</td>
+                        <td>{{ row.reservation_time }}</td>
+                        <td>{{ row.guest_count }}</td>
+                        <td><span class="badge {{ row.status|lower }}">{{ row.status }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

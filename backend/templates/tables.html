@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Restaurant Tables</h1></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-box">
+            <h4>Add Table</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Table Number</label>
+                    <input class="form-control" name="table_number" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Capacity</label>
+                    <input class="form-control" type="number" min="1" name="capacity" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="status">
+                        <option value="available">Available</option>
+                        <option value="reserved">Reserved</option>
+                        <option value="occupied">Occupied</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dining Area</label>
+                    <select class="form-select" name="area_id" required>
+                        {% for area in areas %}
+                        <option value="{{ area.area_id }}">{{ area.area_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Save Table</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card-box">
+            <h4>Table List</h4>
+            <table class="table table-striped">
+                <thead><tr><th>ID</th><th>Number</th><th>Capacity</th><th>Status</th><th>Area</th></tr></thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ row.table_id }}</td>
+                        <td>{{ row.table_number }}</td>
+                        <td>{{ row.capacity }}</td>
+                        <td><span class="badge {{ row.status|lower }}">{{ row.status }}</span></td>
+                        <td>{{ row.area_name or 'Unassigned' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Food Orders</h1></div>
+<div class="row">
+    <div class="col-md-5">
+        <div class="card-box">
+            <h4>Create Order</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Customer</label>
+                    <select class="form-select" name="customer_id" required>
+                        {% for customer in customers_list %}
+                        <option value="{{ customer.customer_id }}">{{ customer.customer_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Table</label>
+                    <select class="form-select" name="table_id">
+                        <option value="">No table</option>
+                        {% for table in tables_list %}
+                        <option value="{{ table.table_id }}">{{ table.table_number }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Waiter</label>
+                    <select class="form-select" name="waiter_id">
+                        <option value="">No waiter</option>
+                        {% for waiter in waiters_list %}
+                        <option value="{{ waiter.waiter_id }}">{{ waiter.waiter_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Order Items</label>
+                    {% for item in menu_items %}
+                    <div class="d-flex gap-2 align-items-center mb-2">
+                        <input type="checkbox" name="item_id" value="{{ item.menu_item_id }}">
+                        <span class="flex-grow-1">{{ item.item_name }} (₹{{ '%.2f'|format(item.price) }})</span>
+                        <input type="number" class="form-control" name="quantity" min="1" value="1" style="width:80px;">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card-box">
+            <h4>Order List</h4>
+            <table class="table table-striped">
+                <thead><tr><th>ID</th><th>Customer</th><th>Table</th><th>Waiter</th><th>Status</th><th>Total</th></tr></thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td><a href="{{ url_for('order_detail', order_id=row.order_id) }}">{{ row.order_id }}</a></td>
+                        <td>{{ row.customer_name }}</td>
+                        <td>{{ row.table_number or '-' }}</td>
+                        <td>{{ row.waiter_name or '-' }}</td>
+                        <td><span class="badge {{ row.status|lower }}">{{ row.status }}</span></td>
+                        <td>₹{{ '%.2f'|format(row.total_amount) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Order Details</h1></div>
+<div class="card-box">
+    {% if order %}
+    <p><strong>Order ID:</strong> {{ order.order_id }} | <strong>Customer:</strong> {{ order.customer_name }} | <strong>Table:</strong> {{ order.table_number or '-' }} | <strong>Waiter:</strong> {{ order.waiter_name or '-' }}</p>
+    <p><strong>Status:</strong> <span class="badge {{ order.status|lower }}">{{ order.status }}</span> | <strong>Total:</strong> ₹{{ '%.2f'|format(order.total_amount) }}</p>
+    <table class="table table-striped">
+        <thead><tr><th>Item</th><th>Quantity</th><th>Unit Price</th><th>Subtotal</th></tr></thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>₹{{ '%.2f'|format(item.unit_price) }}</td>
+                <td>₹{{ '%.2f'|format(item.subtotal) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No order found.</p>
+    {% endif %}
+</div>
+{% endblock %}

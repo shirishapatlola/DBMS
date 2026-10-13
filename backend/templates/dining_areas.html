@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>Dining Areas</h1></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-box">
+            <h4>Add Dining Area</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Area Name</label>
+                    <input class="form-control" name="area_name" required>
+                </div>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card-box">
+            <h4>All Areas</h4>
+            <table class="table table-striped">
+                <thead><tr><th>ID</th><th>Area Name</th></tr></thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr><td>{{ row.area_id }}</td><td>{{ row.area_name }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

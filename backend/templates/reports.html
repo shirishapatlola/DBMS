@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>SQL Reports</h1></div>
+<div class="card-box">
+    <h4>Daily Sales</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Date</th><th>Total Sales</th></tr></thead>
+        <tbody>
+            {% for row in queries.daily_sales %}
+            <tr><td>{{ row.sale_date }}</td><td>₹{{ '%.2f'|format(row.total_sales) }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-box">
+    <h4>Monthly Sales</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Month</th><th>Revenue</th></tr></thead>
+        <tbody>
+            {% for row in queries.monthly_sales %}
+            <tr><td>{{ row.month }}</td><td>₹{{ '%.2f'|format(row.total_sales) }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-box">
+    <h4>Most Popular Menu Items</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Item</th><th>Total Quantity</th></tr></thead>
+        <tbody>
+            {% for row in queries.popular_items %}
+            <tr><td>{{ row.item_name }}</td><td>{{ row.total_quantity }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-box">
+    <h4>Customer Order History</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Customer</th><th>Order Count</th><th>Total Spent</th></tr></thead>
+        <tbody>
+            {% for row in queries.customer_history %}
+            <tr><td>{{ row.customer_name }}</td><td>{{ row.order_count }}</td><td>₹{{ '%.2f'|format(row.total_spent) }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-box">
+    <h4>Pending Kitchen Orders</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Ticket</th><th>Order</th><th>Customer</th><th>Status</th></tr></thead>
+        <tbody>
+            {% for row in queries.pending_kitchen %}
+            <tr><td>{{ row.ticket_id }}</td><td>{{ row.order_id }}</td><td>{{ row.customer_name }}</td><td><span class="badge {{ row.ticket_status|lower }}">{{ row.ticket_status }}</span></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-box">
+    <h4>Revenue by Payment Method</h4>
+    <table class="table table-striped">
+        <thead><tr><th>Method</th><th>Revenue</th></tr></thead>
+        <tbody>
+            {% for row in queries.payment_method_revenue %}
+            <tr><td>{{ row.payment_method }}</td><td>₹{{ '%.2f'|format(row.revenue) }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

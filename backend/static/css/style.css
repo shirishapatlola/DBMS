@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4efe9;
+    color: #1a1a1a;
+}
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: #232325;
+    color: #f5f5f5;
+    padding: 20px 16px;
+}
+
+.brand-box {
+    padding: 16px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 18px;
+}
+
+.nav-link {
+    color: #f5f5f5 !important;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.content-area {
+    flex: 1;
+    padding: 24px;
+}
+
+.page-header {
+    margin-bottom: 24px;
+}
+
+.metric-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.metric-card span {
+    display: block;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.metric-card strong {
+    font-size: 1.8rem;
+    color: #b3261e;
+}
+
+.card-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 18px;
+}
+
+.table thead {
+    background: #f1e4df;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge.pending { background: #f8e7a6; color: #7a5700; }
+.badge.confirmed { background: #d9f7d4; color: #1d6f2d; }
+.badge.cancelled { background: #f6d2d2; color: #8b1d1d; }
+.badge.served { background: #d7ebff; color: #0d4f86; }
+.badge.ready { background: #d6f5dd; color: #1b5e20; }
+.badge.preparing { background: #fce4d6; color: #9a4f18; }
+
+.form-control, .form-select {
+    margin-top: 4px;
+}
+
+.btn-primary {
+    background: #b3261e;
+    border-color: #b3261e;
+}
+
+.btn-primary:hover {
+    background: #8a1d18;
+    border-color: #8a1d18;
+}
+
+.query-box {
+    border: 1px solid #e5d9d0;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fffdf9;
+    margin-bottom: 20px;
+}
+
+.query-box code {
+    display: block;
+    background: #f3f1ee;
+    padding: 10px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+}

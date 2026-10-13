@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-header"><h1>SQL Query Demonstration</h1></div>
+{% for query in queries %}
+<div class="query-box">
+    <h4>{{ query.title }}</h4>
+    <p>{{ query.description }}</p>
+    <code>{{ query.sql }}</code>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                {% for key in query.rows[0].keys() if query.rows %}
+                <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in query.rows %}
+            <tr>
+                {% for key in row.keys() %}
+                <td>{{ row[key] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+{% endblock %}
